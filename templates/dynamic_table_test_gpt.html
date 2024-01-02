@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Editable Table</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script>
+		// Function to handle the "Edit" button click event
+		function handleEditButtonClick(event) {
+			event.preventDefault();
+			var form = document.createElement('form');
+			form.action = 'process.php';
+			form.method = 'POST';
+			form.style.display = 'none';
+
+			var table = document.getElementById('myTable');
+			var rows = table.getElementsByTagName('tr');
+			for (var i = 1; i < rows.length; i++) {
+				var cells = rows[i].getElementsByTagName('td');
+				for (var j = 0; j < cells.length; j++) {
+					var input = document.createElement('input');
+					input.type = 'hidden';
+					input.name = 'data[' + (i-1) + '][' + j + ']';
+					input.value = cells[j].innerText;
+					form.appendChild(input);
+				}
+			}
+
+			document.body.appendChild(form);
+			form.submit();
+		}
+
+		// Function to add event listeners to the "Edit" button
+		function addEditButtonListeners() {
+			var buttons = document.getElementsByClassName('edit-button');
+			for (var i = 0; i < buttons.length; i++) {
+				buttons[i].addEventListener('click', handleEditButtonClick);
+			}
+		}
+
+		// Function to initialize the table and add event listeners
+		function initializeTable() {
+			var table = document.createElement('table');
+			table.id = 'myTable';
+
+			var headerRow = document.createElement('tr');
+			var nameHeader = document.createElement('th');
+			nameHeader.innerText = 'Name';
+			headerRow.appendChild(nameHeader);
+			var ageHeader = document.createElement('th');
+			ageHeader.innerText = 'Age';
+			headerRow.appendChild(ageHeader);
+			var emailHeader = document.createElement('th');
+			emailHeader.innerText = 'Email';
+			headerRow.appendChild(emailHeader);
+			var editHeader = document.createElement('th');
+			editHeader.innerText = 'Edit';
+			headerRow.appendChild(editHeader);
+			table.appendChild(headerRow);
+
+			var data = [				{ name: 'John', age: '30', email: 'john@example.com' },				{ name: 'Mary', age: '25', email: 'mary@example.com' },				{ name: 'Peter', age: '40', email: 'peter@example.com' }			];
+
+			for (var i = 0; i < data.length; i++) {
+				var row = document.createElement('tr');
+				var nameCell = document.createElement('td');
+				nameCell.contentEditable = true;
+				nameCell.innerText = data[i].name;
+				row.appendChild(nameCell);
+				var ageCell = document.createElement('td');
+				ageCell.contentEditable = true;
+				ageCell.innerText = data[i].age;
+				row.appendChild(ageCell);
+				var emailCell = document.createElement('td');
+				emailCell.contentEditable = true;
+				emailCell.innerText = data[i].email;
+				row.appendChild(emailCell);
+				var editCell = document.createElement('td');
+				var editButton = document.createElement('button');
+				editButton.innerText = 'Edit';
+				editButton.className = 'edit-button';
+				editCell.appendChild(editButton);
+				row.appendChild(editCell);
+				table.appendChild(row);
+			}
+
+			document.body.appendChild(table);
+
+			addEditButtonListeners();
+
+        }
+
+// Initialize the table and add event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    initializeTable();
+    addEditButtonListeners();
+});
+</script>
+</head>
+<body>
+</body>
+</html>

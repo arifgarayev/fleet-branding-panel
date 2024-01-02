@@ -1,0 +1,746 @@
+{% extends "base_auth.html" %} {% block body_content %}
+
+<div class="mx-auto">
+  <div class="border-b border-gray-200 dark:border-gray-700 mb-4">
+    <ul
+      class="flex justify-center -mb-px"
+      id="myTab"
+      data-tabs-toggle="#myTabContent"
+      role="tablist"
+    >
+      <li class="mx-4" role="presentation">
+        <a href="{{url_for('admin.admin_create_new_user')}}">
+          <button
+            class="inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300"
+            id="profile-tab"
+            data-tabs-target="#profile"
+            type="button"
+            role="tab"
+            aria-controls="profile"
+            aria-selected="false"
+          >
+            Yeni istifadəçi yarad
+          </button>
+        </a>
+      </li>
+      <li class="mx-2" role="presentation">
+        <a href="{{url_for('admin.admin_index')}}">
+          <button
+            class="inline-block rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 dark:border-blue-500"
+            id="dashboard-tab"
+            data-tabs-target="#dashboard"
+            type="button"
+            role="tab"
+            aria-controls="dashboard"
+            aria-selected="true"
+          >
+            Reklam yoxlanışı
+          </button>
+        </a>
+      </li>
+      <li class="mx-4" role="presentation">
+        <a href="{{url_for('admin.add_new_car')}}">
+          <button
+            class="inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300"
+            id="settings-tab"
+            data-tabs-target="#settings"
+            type="button"
+            role="tab"
+            aria-controls="settings"
+            aria-selected="false"
+          >
+            Məlumat yenilə
+          </button>
+        </a>
+      </li>
+
+      <li class="mx-4" role="presentation">
+        <a href="{{url_for('admin.stats')}}">
+          <button
+            class="inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300"
+            id="stats-tab"
+            data-tabs-target="#stats"
+            type="button"
+            role="tab"
+            aria-controls="stats"
+            aria-selected="false"
+          >
+            Statistika
+          </button>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div id="myTabContent">
+    {% if action_type[0] %}
+    <div class="flex justify-center" id="success_alert_banner">
+      <div
+        class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
+      >
+        <div class="flex items-center justify-center w-12 bg-emerald-500">
+          <svg
+            class="w-6 h-6 text-white fill-current"
+            viewBox="0 0 40 40"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"
+            />
+          </svg>
+        </div>
+
+        <div class="px-4 py-2 -mx-3">
+          <div class="mx-3">
+            <span class="font-semibold text-emerald-500 dark:text-emerald-400"
+              >Müvəffəqiyyət</span
+            >
+            <p class="text-sm text-gray-600 dark:text-gray-200">
+              {{updated_application.applications_users_id_fk.users_company_id_fk.internal_company_name}}
+              -
+              {{updated_application.applications_car_id_fk.internal_car_reg_number}}
+              - reklam videosu müvəffəqiyyətlə təstiqləndi
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% elif action_type[1] %}
+    <div class="flex justify-center" id="success_alert_banner">
+      <div
+        class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
+      >
+        <div class="flex items-center justify-center w-12 bg-red-500">
+          <svg
+            class="w-6 h-6 text-white fill-current"
+            viewBox="0 0 40 40"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z"
+            />
+          </svg>
+        </div>
+
+        <div class="px-4 py-2 -mx-3">
+          <div class="mx-3">
+            <span class="font-semibold text-red-500 dark:text-red-400"
+              >Rədd</span
+            >
+            <p
+              class="text-xs text-gray-600 dark:text-gray-200"
+              id="error_message_text"
+            >
+              {{updated_application.applications_users_id_fk.users_company_id_fk.internal_company_name}}
+              -
+              {{updated_application.applications_car_id_fk.internal_car_reg_number}}
+              - reklam videosu Rədd edildi
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% elif action_type[2] %}
+
+    <div class="flex justify-center" id="dialog-overlay">
+      <div
+        class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
+      >
+        <div class="flex items-center justify-center w-12 bg-blue-500">
+          <svg
+            class="w-6 h-6 text-white fill-current"
+            viewBox="0 0 40 40"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z"
+            />
+          </svg>
+        </div>
+
+        <div class="px-4 py-2 -mx-3">
+          <div class="mx-3">
+            <span class="font-semibold text-blue-500 dark:text-blue-400"
+              >Sıfırla</span
+            >
+            <p
+              class="text-sm text-gray-600 dark:text-gray-200"
+              id="info_message"
+            >
+              {{updated_application.applications_users_id_fk.users_company_id_fk.internal_company_name}}
+              -
+              {{updated_application.applications_car_id_fk.internal_car_reg_number}}
+              - Məlumatlar sıfırlandı!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% elif action_type[3] %}
+
+    <div class="flex justify-center" id="dialog-overlay">
+      <div
+        class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
+      >
+        <div class="flex items-center justify-center w-12 bg-blue-500">
+          <svg
+            class="w-6 h-6 text-white fill-current"
+            viewBox="0 0 40 40"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z"
+            />
+          </svg>
+        </div>
+
+        <div class="px-4 py-2 -mx-3">
+          <div class="mx-3">
+            <span class="font-semibold text-blue-500 dark:text-blue-400"
+              >Arxivləndi</span
+            >
+            <p
+              class="text-sm text-gray-600 dark:text-gray-200"
+              id="info_message"
+            >
+              {% for application in list_of_updated_applications%}
+              {{application.applications_users_id_fk.users_company_id_fk.internal_company_name}}
+              - {{application.applications_car_id_fk.internal_car_reg_number}} -
+              Məlumatlar arxivləndi! {% endfor %}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% elif action_type[4] %}
+
+    <div class="flex justify-center" id="dialog-overlay">
+      <div
+        class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
+      >
+        <div class="flex items-center justify-center w-12 bg-blue-500">
+          <svg
+            class="w-6 h-6 text-white fill-current"
+            viewBox="0 0 40 40"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z"
+            />
+          </svg>
+        </div>
+
+        <div class="px-4 py-2 -mx-3">
+          <div class="mx-3">
+            <span class="font-semibold text-blue-500 dark:text-blue-400"
+              >Arxivləndi</span
+            >
+            <p
+              class="text-sm text-gray-600 dark:text-gray-200"
+              id="info_message"
+            >
+              Bütün məlumatlar arxivləndi!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endif %}
+
+    <div class="hidden flex justify-center" id="error_alert_banner">
+      <div
+        class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
+      >
+        <div class="flex items-center justify-center w-12 bg-red-500">
+          <svg
+            class="w-6 h-6 text-white fill-current"
+            viewBox="0 0 40 40"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z"
+            />
+          </svg>
+        </div>
+
+        <div class="px-4 py-2 -mx-3">
+          <div class="mx-3">
+            <span class="font-semibold text-red-500 dark:text-red-400"
+              >Xəta</span
+            >
+            <p
+              class="text-xs text-gray-600 dark:text-gray-200"
+              id="error_message_text"
+            >
+              Zəhmət olmasa avtomobilin videosunu yükləyin!
+              <!-- Ferqlenme and etc. -->
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- End warning alert message -->
+
+    <div class="hidden flex justify-center" id="dialog-overlay">
+      <div
+        class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
+      >
+        <div class="flex items-center justify-center w-12 bg-blue-500">
+          <svg
+            class="w-6 h-6 text-white fill-current"
+            viewBox="0 0 40 40"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z"
+            />
+          </svg>
+        </div>
+
+        <div class="px-4 py-2 -mx-3">
+          <div class="mx-3">
+            <span class="font-semibold text-blue-500 dark:text-blue-400"
+              >Info</span
+            >
+            <p
+              class="text-sm text-gray-600 dark:text-gray-200"
+              id="info_message"
+            >
+              Zəhmət olmasa, faylın yüklənməsini gözləyin!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- New tab -->
+    <div
+      class="hidden flex justify-center bg-gray-50 p-4 rounded-lg dark:bg-gray-800"
+      id="settings"
+      role="tabpanel"
+      aria-labelledby="settings-tab"
+    ></div>
+
+    <!-- End tab -->
+
+    <div
+      class="hidden flex justify-center bg-gray-50 p-4 rounded-lg dark:bg-gray-800"
+      id="stats"
+      role="tabpanel"
+      aria-labelledby="stats-tab"
+    ></div>
+
+    <!-- New tab -->
+
+    <div
+      class="bg-gray-50 p-4 rounded-lg dark:bg-gray-800"
+      id="dashboard"
+      role="tabpanel"
+      aria-labelledby="dashboard-tab"
+    >
+      <section class="flex-nowrap w-full justify-center">
+        <div class="flex items-center gap-x-3">
+          <h2 class="text-lg font-medium text-gray-800 dark:text-white">
+            Mövcud yoxlanışlar
+          </h2>
+
+          <span
+            class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400"
+            >{{ application_count }} yoxlanış</span
+          >
+
+          <label for="simple-search" class="sr-only">Search</label>
+          <div class="relative px-6 py-1 w-1/2">
+            <div
+              class="absolute inset-y-0 left-6 flex items-center pl-3 pointer-events-none"
+            >
+              <svg
+                aria-hidden="true"
+                class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
+
+            <input
+              type="text"
+              id="simple-search"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Search"
+              required
+            />
+          </div>
+          <button
+            id="searchButton"
+            type="button"
+            onclick="searchApps($('#simple-search').prop('value'), $('#simple-search'))"
+            class="p-2.5 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            autofocus
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              ></path>
+            </svg>
+            <span class="sr-only">Search</span>
+          </button>
+
+          <div class="ml-auto">
+            <a href="{{url_for('admin.download_csv')}}">
+              <button
+                class="justify-self-end px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+              >
+                Export CSV
+              </button>
+            </a>
+          </div>
+        </div>
+      </section>
+      <form
+        action="{{url_for('admin.admin_index') + '?limit=' + current_limit|string}}"
+        method="POST"
+        id="auto-status"
+      >
+        <button
+          class="flex ml-4 items-center px-2 py-2 font-small tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+          type="submit"
+          form="auto-status"
+          id="zz"
+          name="archiveAll"
+          value="true"
+          disabled
+        >
+          <span>Hamsını Arxivlə</span>
+        </button>
+        <div class="relative shadow-md sm:rounded-lg">
+          <table
+            class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+          >
+            <thead
+              class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+            >
+              <tr>
+                <th scope="col" class="p-4">
+                  <div class="flex items-center">
+                    <input
+                      id="checkbox-all-search"
+                      type="checkbox"
+                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      onchange="selectAll(this)"
+                    />
+                    <label for="checkbox-all-search" class="sr-only"
+                      >checkbox</label
+                    >
+
+                    <button
+                      class="flex ml-4 items-center px-2 py-2 font-small tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+                      type="submit"
+                      form="auto-status"
+                      id="z"
+                      name="archive"
+                      value="true"
+                    >
+                      <span>Arxivlə</span>
+                    </button>
+                  </div>
+                </th>
+                <th scope="col" class="px-2 py-3">
+                  Fleet | Avto qeydiyyat nişanı
+                </th>
+
+                <th scope="col" class="px-2 py-3">Status</th>
+                <th scope="col" class="px-2 py-3">Tarix</th>
+                <th scope="col" class="px-2 py-3">şərh</th>
+                <th scope="col" class="px-2 py-3">Fleet Owner şərh</th>
+                <th scope="col" class="px-2 py-3">Yüklənilən Video/Şəkil</th>
+                <th scope="col" class="px-2 py-3">Əməliyyat</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for application in all_applications %}
+              <tr
+                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                id="{{application.id}}"
+              >
+                <td class="w-4 p-4">
+                  <div class="flex items-center">
+                    <input
+                      name="applicationIDs[]"
+                      value="{{application.id}}"
+                      type="checkbox"
+                      class="checkbox-table-search w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label for="checkbox-table-search-1" class="sr-only"
+                      >checkbox</label
+                    >
+                  </div>
+                </td>
+                <td
+                  class="px-2 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  <div class="place-items-center grid grid-rows-2">
+                    <div class="text-base font-semibold">
+                      <input
+                        class="text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        type="text"
+                        name="car_input_ref_{{application.id}}"
+                        value="{{application.applications_car_id_fk.internal_car_reg_number}}"
+                        id="carRef"
+                        onkeyup="searchCars(this)"
+                      />
+
+                      <input
+                        type="hidden"
+                        name="car_ref_{{application.id}}"
+                        value="{{application.car_id_fkey}}"
+                      />
+                    </div>
+                    <div class="font-normal text-gray-500">
+                      {{
+                      application.applications_car_id_fk.cars_company_id_fk.internal_company_name
+                      }}
+                    </div>
+                  </div>
+                </td>
+                <td class="px-2 py-4">
+                  {% if application.application_status == 'Approved' %}
+                  <div class="flex items-center">
+                    <div
+                      class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"
+                    ></div>
+                    Təstiqlənmiş | {% if application.type_of_application == 2 %}
+                    <p style="color: blue">&nbsp;Video reklam</p>
+                    {% elif application.type_of_application == 1 %}
+                    <p style="color: blue">&nbsp;Fərqlənmə nişanı</p>
+                    {% elif application.type_of_application == 3 %}
+                    <p style="color: red">&nbsp;Avtomobil silinməsi</p>
+                    {% endif %}
+                  </div>
+                  {% elif application.application_status == 'Declined'%}
+
+                  <div class="flex items-center">
+                    <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
+                    Rədd edilmiş | {% if application.type_of_application == 2 %}
+                    <p style="color: blue">&nbsp;Video reklam</p>
+                    {% elif application.type_of_application == 1 %}
+                    <p style="color: blue">&nbsp;Fərqlənmə nişanı</p>
+                    {% elif application.type_of_application == 3 %}
+                    <p style="color: red">&nbsp;Avtomobil silinməsi</p>
+                    {% endif %}
+                  </div>
+
+                  {% elif application.application_status == 'Pending' %}
+
+                  <div class="flex items-center">
+                    <div
+                      class="h-2.5 w-2.5 rounded-full bg-gray-500 mr-2"
+                    ></div>
+                    Yoxlanışda | {% if application.type_of_application == 2 %}
+                    <p style="color: blue">&nbsp;Video reklam</p>
+                    {% elif application.type_of_application == 1 %}
+                    <p style="color: blue">&nbsp;Fərqlənmə nişanı</p>
+                    {% elif application.type_of_application == 3 %}
+                    <p style="color: red">&nbsp;Avtomobil silinməsi</p>
+                    {% endif %}
+                  </div>
+
+                  {% endif %}
+                </td>
+                <td class="px-2 py-4">
+                  {{ application.date_applied.strftime('%Y-%m-%d') }}
+                </td>
+                <td class="px-2 py-4">
+                  <textarea
+                    id="admin_comment"
+                    name="admin_comment_{{application.id}}"
+                    class="block w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Qeyd"
+                  >
+{% if application.b_comment %}{{application.b_comment | trim }}{% endif %}</textarea
+                  >
+                </td>
+                <td class="px-2 py-4">
+                  <textarea
+                    id="fo_comment"
+                    name="fo_comment"
+                    class="block w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    disabled
+                  >
+{{application.quote}}</textarea
+                  >
+                </td>
+                <td class="px-2 py-4">
+                  {% if application.type_of_application == 2 %}
+                  <div
+                    class="w-52 h-52 max-w-full border border-gray-200 rounded-lg dark:border-gray-700"
+                  >
+                    <div class="rtopvideoplayer">
+
+                    <video
+                      class="w-52 h-52 max-w-full border border-gray-200 rounded-lg dark:border-gray-700"
+                      preload="none"
+                      controls
+                      playsinline
+                    >
+                      <source
+                        src="{{ signed_urls[application][0] }}"
+                        type="video/mp4"
+                      />
+                      <source
+                        src="{{ signed_urls[application][0] }}"
+                        type="video/webm"
+                      />
+                      <source
+                        src="{{ signed_urls[application][0] }}"
+                        type="video/ogg"
+                      />
+                    </video>
+                    </div>
+                  </div>
+
+                  {% elif application.type_of_application == 1 %}
+                  <a href="{{signed_urls[application][0]}}" target="_blank">
+                    <img
+                      loading="lazy"
+                      width="208"
+                      height="208"
+                      src="{{signed_urls[application][0]}}"
+                      alt="Fərqlənmə nişanı"
+                    />
+                  </a>
+
+                  {% else %}
+
+                  <p class="justify-center">Avtomobil silinməsi</p>
+                  {% endif %}
+                </td>
+                <td class="px-2 py-4">
+                  <div class="flex flex-col items-center gap-y-2">
+                    <button
+                      class="flex items-center px-2 py-2 font-small tracking-wide text-white capitalize transition-colors duration-300 transform bg-green-600 rounded-lg hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-300 focus:ring-opacity-80"
+                      type="submit"
+                      form="auto-status"
+                      id="approve"
+                      name="approve"
+                      value="{{application.id}}"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-5 h-5 sm:w-6 sm:h-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                        />
+                      </svg>
+
+                      <span class="mx-1">Təsdiqlə</span>
+                    </button>
+
+                    <button
+                      class="flex items-center px-2 py-2 font-small tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80"
+                      type="submit"
+                      form="auto-status"
+                      id="reject"
+                      name="reject"
+                      value="{{application.id}}"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-5 h-5 sm:w-6 sm:h-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                        />
+                      </svg>
+
+                      <span class="mx-1">Rədd et&nbsp;</span>
+                    </button>
+
+                    <button
+                      class="flex items-center px-2 py-2 font-small tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+                      type="submit"
+                      form="auto-status"
+                      id="revert"
+                      name="revert"
+                      value="{{application.id}}"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-5 h-5 sm:w-6 sm:h-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                        />
+                      </svg>
+
+                      <span class="mx-1">&nbsp;&nbsp;Sıfırla&nbsp;&nbsp;</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <div class="">
+            {% for i in range(num_of_pages + 1) %} {% if i == current_limit %}
+            <a
+              href="{{url_for('admin.admin_index') + '?limit=' + i|string}}"
+              class="items-center justify-between px-2 py-1 text-sm text-blue-500 rounded-md dark:bg-gray-800 bg-blue-100/60"
+              >{{i + 1}}</a
+            >
+            {% else %}
+            <a
+              href="{{url_for('admin.admin_index') + '?limit=' + i|string}}"
+              class="items-center justify-between px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
+              >{{i + 1}}</a
+            >
+            {% endif %} {% endfor %}
+          </div>
+
+          <!-- Edit user modal -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

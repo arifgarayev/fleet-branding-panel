@@ -1,0 +1,495 @@
+{
+  "result": {
+    "1": {
+      "app-car-reg": "77BK907",
+      "app-company": "TX Beconus",
+      "app-id": 1280,
+      "app-status": "Declined",
+      "app-type": 1,
+      "app-applied": 12123
+    },
+    "2": {
+      "app-car-reg": "77BJ652",
+      "app-company": "TX Zevk",
+      "app-id": 1283,
+      "app-status": "Declined",
+      "app-type": 1
+    },
+    "6": {
+      "app-car-reg": "77BU250",
+      "app-company": "TX Sonata",
+      "app-id": 1868,
+      "app-status": "Declined",
+      "app-type": 2
+    },
+    "10": {
+      "app-car-reg": "77BU829",
+      "app-company": "TX Zee Taxi Park",
+      "app-id": 2343,
+      "app-status": "Declined",
+      "app-type": 2
+    },
+    "12": {
+      "app-car-reg": "77BB476",
+      "app-company": "TX Miraj",
+      "app-id": 2413,
+      "app-status": "Declined",
+      "app-type": 2
+    },
+    "13": {
+      "app-car-reg": "77BR230",
+      "app-company": "TX STK",
+      "app-id": 2515,
+      "app-status": "Declined",
+      "app-type": 1
+    },
+    "14": {
+      "app-car-reg": "77BP749",
+      "app-company": "TX EH025",
+      "app-id": 2661,
+      "app-status": "Declined",
+      "app-type": 1
+    },
+    "15": {
+      "app-car-reg": "77BG813",
+      "app-company": "TX Guven",
+      "app-id": 1056,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "16": {
+      "app-car-reg": "77BY280",
+      "app-company": "TX ME",
+      "app-id": 1077,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "17": {
+      "app-car-reg": "77BR508",
+      "app-company": "TX JN Reklam",
+      "app-id": 1089,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "18": {
+      "app-car-reg": "77BU132",
+      "app-company": "TX VUMA",
+      "app-id": 1107,
+      "app-status": "Approved",
+      "app-type": 1
+    },
+    "20": {
+      "app-car-reg": "77BG823",
+      "app-company": "TX Guven",
+      "app-id": 1148,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "21": {
+      "app-car-reg": "77BM456",
+      "app-company": "TX Guven",
+      "app-id": 1155,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "22": {
+      "app-car-reg": "77BJ126",
+      "app-company": "TX AGF",
+      "app-id": 1176,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "24": {
+      "app-car-reg": "77BG396",
+      "app-company": "TX Zevk",
+      "app-id": 1202,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "25": {
+      "app-car-reg": "77BJ125",
+      "app-company": "TX AGF",
+      "app-id": 1226,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "26": {
+      "app-car-reg": "77BU406",
+      "app-company": "TX Wolf333",
+      "app-id": 1235,
+      "app-status": "Approved",
+      "app-type": 1
+    },
+    "27": {
+      "app-car-reg": "77BU731",
+      "app-company": "TX Boss",
+      "app-id": 1260,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "28": {
+      "app-car-reg": "77BF815",
+      "app-company": "TX FF Taksi",
+      "app-id": 1269,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "33": {
+      "app-car-reg": "77BY241",
+      "app-company": "TX Kentavr",
+      "app-id": 1396,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "34": {
+      "app-car-reg": "77BR826",
+      "app-company": "TX Kentavr",
+      "app-id": 1406,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "35": {
+      "app-car-reg": "77BK785",
+      "app-company": "TP Taxi Point",
+      "app-id": 1427,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "36": {
+      "app-car-reg": "77BJ652",
+      "app-company": "TX Zevk",
+      "app-id": 1452,
+      "app-status": "Approved",
+      "app-type": 1
+    },
+    "37": {
+      "app-car-reg": "77BK647",
+      "app-company": "TX Zevk",
+      "app-id": 1454,
+      "app-status": "Approved",
+      "app-type": 1
+    },
+    "38": {
+      "app-car-reg": "77BR145",
+      "app-company": "TP Taxi Point",
+      "app-id": 1473,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "39": {
+      "app-car-reg": "77BS761",
+      "app-company": "TP Taxi Point",
+      "app-id": 1489,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "40": {
+      "app-car-reg": "77BV129",
+      "app-company": "TP Taxi Point",
+      "app-id": 1501,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "42": {
+      "app-car-reg": "77BM451",
+      "app-company": "TX Guven",
+      "app-id": 1555,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "43": {
+      "app-car-reg": "77BN323",
+      "app-company": "TX Ravanelli",
+      "app-id": 1567,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "44": {
+      "app-car-reg": "77BC712",
+      "app-company": "TX Gutu",
+      "app-id": 1588,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "45": {
+      "app-car-reg": "77BT380",
+      "app-company": "TX Yupiter",
+      "app-id": 1592,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "47": {
+      "app-car-reg": "77BU406",
+      "app-company": "TX Wolf333",
+      "app-id": 1626,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "48": {
+      "app-car-reg": "77BB901",
+      "app-company": "TX Taksi144",
+      "app-id": 1651,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "49": {
+      "app-car-reg": "77BJ819",
+      "app-company": "TX VUMA",
+      "app-id": 1660,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "50": {
+      "app-car-reg": "77BM359",
+      "app-company": "TX RN",
+      "app-id": 1689,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "51": {
+      "app-car-reg": "77BC712",
+      "app-company": "TX Gutu",
+      "app-id": 1699,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "52": {
+      "app-car-reg": "77BG257",
+      "app-company": "TX TRC",
+      "app-id": 1721,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "53": {
+      "app-car-reg": "77BU296",
+      "app-company": "TX Nazli",
+      "app-id": 1737,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "54": {
+      "app-car-reg": "77BA217",
+      "app-company": "TX SBRON",
+      "app-id": 1749,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "55": {
+      "app-car-reg": "77BP365",
+      "app-company": "TX Konor",
+      "app-id": 1764,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "56": {
+      "app-car-reg": "77BE897",
+      "app-company": "TX Modern",
+      "app-id": 1785,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "57": {
+      "app-car-reg": "77BK470",
+      "app-company": "TX Shahin",
+      "app-id": 1801,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "59": {
+      "app-car-reg": "77BK469",
+      "app-company": "TX Shahin",
+      "app-id": 1829,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "60": {
+      "app-car-reg": "77BJ954",
+      "app-company": "TX Ulduz",
+      "app-id": 1839,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "61": {
+      "app-car-reg": "77BG558",
+      "app-company": "TX Modern",
+      "app-id": 1863,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "62": {
+      "app-car-reg": "77BG558",
+      "app-company": "TX Modern",
+      "app-id": 1878,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "63": {
+      "app-car-reg": "77BU859",
+      "app-company": "TX Shahin",
+      "app-id": 1898,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "64": {
+      "app-car-reg": "77BP307",
+      "app-company": "TX Gutu",
+      "app-id": 1909,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "65": {
+      "app-car-reg": "77BC985",
+      "app-company": "TX Novxani",
+      "app-id": 1920,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "66": {
+      "app-car-reg": "77BG586",
+      "app-company": "TX Mammadov",
+      "app-id": 1939,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "67": {
+      "app-car-reg": "77BK529",
+      "app-company": "TX NIK",
+      "app-id": 1948,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "69": {
+      "app-car-reg": "77BM526",
+      "app-company": "TX EKS Group",
+      "app-id": 1993,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "74": {
+      "app-car-reg": "77BS296",
+      "app-company": "TX T Group City",
+      "app-id": 2077,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "77": {
+      "app-car-reg": "77BM910",
+      "app-company": "TX Gutu",
+      "app-id": 2141,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "78": {
+      "app-car-reg": "77BM574",
+      "app-company": "TX AGF",
+      "app-id": 2154,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "79": {
+      "app-car-reg": "77BM941",
+      "app-company": "TX MD941",
+      "app-id": 2166,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "80": {
+      "app-car-reg": "77BU815",
+      "app-company": "TX IO Bolt",
+      "app-id": 2196,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "82": {
+      "app-car-reg": "77BJ683",
+      "app-company": "TX AF Park MMC",
+      "app-id": 2221,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "85": {
+      "app-car-reg": "77BS296",
+      "app-company": "TX T Group City",
+      "app-id": 2271,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "87": {
+      "app-car-reg": "77BK175",
+      "app-company": "TP Taxi Point",
+      "app-id": 2314,
+      "app-status": "Approved",
+      "app-type": 1
+    },
+    "88": {
+      "app-car-reg": "77BL169",
+      "app-company": "TP Taxi Point",
+      "app-id": 2328,
+      "app-status": "Approved",
+      "app-type": 1
+    },
+    "89": {
+      "app-car-reg": "77BJ125",
+      "app-company": "TX AGF",
+      "app-id": 2346,
+      "app-status": "Approved",
+      "app-type": 3
+    },
+    "90": {
+      "app-car-reg": "77BU829",
+      "app-company": "TX Zee Taxi Park",
+      "app-id": 2362,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "91": {
+      "app-car-reg": "77BB476",
+      "app-company": "TX Miraj",
+      "app-id": 2394,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "92": {
+      "app-car-reg": "77BB476",
+      "app-company": "TX Miraj",
+      "app-id": 2406,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "93": {
+      "app-car-reg": "77BB431",
+      "app-company": "TX Xezer Cars",
+      "app-id": 2429,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "94": {
+      "app-car-reg": "77BG859",
+      "app-company": "TX Formula",
+      "app-id": 2483,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "95": {
+      "app-car-reg": "77BM451",
+      "app-company": "TX Guven",
+      "app-id": 2503,
+      "app-status": "Approved",
+      "app-type": 1
+    },
+    "96": {
+      "app-car-reg": "77BT385",
+      "app-company": "TX AF Park MMC",
+      "app-id": 2639,
+      "app-status": "Approved",
+      "app-type": 2
+    },
+    "97": {
+      "app-car-reg": "77BK643",
+      "app-company": "TX A55",
+      "app-id": 2657,
+      "app-status": "Approved",
+      "app-type": 3
+    }
+  }
+}

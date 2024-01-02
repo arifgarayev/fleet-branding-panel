@@ -1,0 +1,269 @@
+{% extends "base_auth.html" %} {% block body_content %}
+
+<!-- <link
+  rel="stylesheet"
+  href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css"
+/>
+<script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script> -->
+
+<div class="max-w-6xl mx-auto">
+  <!-- New tab -->
+  <div
+    class="flex justify-center bg-gray-50 p-4 rounded-lg dark:bg-gray-800"
+    id="settings"
+    role="tabpanel"
+    aria-labelledby="settings-tab"
+  >
+    <section class="container px-4 mx-auto">
+      <div class="flex flex-col mt-6">
+        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          {% if 'Mobile' in user_agent %}
+          <p>Sağa sürüşdürün ---></p>
+          {% endif %}
+          <div
+            class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8"
+          >
+            <div
+              class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg"
+            >
+              <table
+                class="min-w-full divide-y divide-gray-200 dark:divide-gray-700"
+              >
+                <thead class="bg-gray-50 dark:bg-gray-800">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                    >
+                      <span>Login</span>
+                    </th>
+                    <th
+                      scope="col"
+                      class="py-3.5 text-sm font-normal text-gray-500 dark:text-gray-400"
+                    >
+                      <div class="flex items-center gap-x-3">
+                        <span>Avtomobilin qeydiyyat nişanı</span>
+                      </div>
+                    </th>
+
+                    <th
+                      scope="col"
+                      class="px-16 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                    >
+                      <div class="flex items-center gap-x-3">
+                        <span>Sorğunun statusu və tipi</span>
+                      </div>
+                    </th>
+
+                    <th
+                      scope="col"
+                      class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                    >
+                      <span>Yazılan şərh</span>
+                    </th>
+
+                    <th
+                      scope="col"
+                      class="px-14 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                    >
+                      şərh
+                    </th>
+
+                    <th
+                      scope="col"
+                      class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                    >
+                      <span>Yüklənilən Video/Şəkil</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900"
+                >
+                  {% for application in applications %}
+
+                  <tr>
+                    <td
+                      class="px-4 py-6 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
+                    >
+                      <p>{{ applications[application][2].username }}</p>
+                    </td>
+
+                    <td
+                      class="px-4 py-4 text-center text-sm font-medium text-gray-700 whitespace-nowrap"
+                    >
+                      <div class="inline-flex items-center gap-x-3">
+                        <div class="flex items-center gap-x-2">
+                          <div>
+                            <h2
+                              class="font-medium text-gray-800 dark:text-white"
+                            >
+                              {{
+                              applications[application][1].internal_car_reg_number
+                              }}
+                            </h2>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td
+                      class="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap"
+                    >
+                      {% if application.application_status == 'Pending' %}
+
+                      <div
+                        class="inline-flex items-center px-3 py-1 text-gray-500 rounded-full gap-x-2 bg-gray-100/60 dark:bg-gray-800"
+                      >
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M4.5 7L2 4.5M2 4.5L4.5 2M2 4.5H8C8.53043 4.5 9.03914 4.71071 9.41421 5.08579C9.78929 5.46086 10 5.96957 10 6.5V10"
+                            stroke="#667085"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+
+                        <h2 class="text-sm font-normal">
+                          Yoxlanışda | {% if application.type_of_application ==
+                          2 %}
+                          <p style="color: blue">Video reklam</p>
+                          {% elif application.type_of_application == 1 %}
+                          <p style="color: blue">Fərqlənmə nişanı</p>
+                          {% elif application.type_of_application == 3 %}
+                          <p style="color: red">Avtomobil silinməsi</p>
+                          {% endif %}
+                        </h2>
+                      </div>
+
+                      {% elif application.application_status == 'Approved' %}
+
+                      <div class="inline-flex items-center px-3 py-1 gap-x-2">
+                        <span
+                          class="h-1.5 w-1.5 rounded-full bg-emerald-500"
+                        ></span>
+
+                        <h2 class="text-sm font-normal text-emerald-500">
+                          Təstiq olunub | {% if application.type_of_application
+                          == 2 %}
+                          <p style="color: blue">Video reklam</p>
+                          {% elif application.type_of_application == 1 %}
+                          <p style="color: blue">Fərqlənmə nişanı</p>
+                          {% elif application.type_of_application == 3 %}
+                          <p style="color: red">Avtomobil silinməsi</p>
+                          {% endif %}
+                        </h2>
+                      </div>
+
+                      {% elif application.application_status == 'Declined' %}
+                      <div
+                        class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-red-500 bg-red-100/60 dark:bg-gray-800"
+                      >
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M9 3L3 9M3 3L9 9"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+
+                        <h2 class="text-sm font-normal">
+                          Rədd edilib | {% if application.type_of_application ==
+                          2 %}
+                          <p style="color: blue">Video reklam</p>
+                          {% elif application.type_of_application == 1 %}
+                          <p style="color: blue">Fərqlənmə nişanı</p>
+                          {% elif application.type_of_application == 3 %}
+                          <p style="color: red">Avtomobil silinməsi</p>
+                          {% endif %}
+                        </h2>
+                      </div>
+
+                      {% endif %}
+                    </td>
+                    <td
+                      class="px-2 py-4 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                      <p>{{ application.quote }}</p>
+                    </td>
+                    <td
+                      class="px-2 py-4 text-sm text-gray-500 dark:text-gray-300"
+                    >
+                      <p>
+                        {% if not application.b_comment == None %}{{
+                        application.b_comment }}{% endif %}
+                      </p>
+                    </td>
+
+                    <td
+                      class="px-4 py-6 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
+                    >
+                      {% if application.type_of_application == 2 %}
+                      <div
+                        class="w-52 h-52 max-w-full border border-gray-200 rounded-lg dark:border-gray-700"
+                      >
+                        <video
+                          class="w-52 h-52 max-w-full border border-gray-200 rounded-lg dark:border-gray-700"
+                          controls
+                          preload="none"
+                          playsinline
+                        >
+                          <source
+                            src="{{ applications[application][0] }}#t=0.010"
+                            type="video/mp4"
+                          />
+                          <source
+                            src="{{ applications[application][0] }}#t=0.010"
+                            type="video/webm"
+                          />
+                          <source
+                            src="{{ applications[application][0] }}#t=0.010"
+                            type="video/ogg"
+                          />
+                        </video>
+
+                        {% elif application.type_of_application == 1 %}
+                        <a
+                          target="_blank"
+                          href="{{ applications[application][0] }}"
+                        >
+                          <img
+                            loading="lazy"
+                            target="_blank"
+                            src="{{ applications[application][0] }}"
+                            alt="Fərqlənmə nişanı"
+                            onclick="window.open('anotherpage.html', '_blank');"
+                          />
+                        </a>
+                        {% endif %}
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- End tab -->
+</div>
+
+{% endblock %}

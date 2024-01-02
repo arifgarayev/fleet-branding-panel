@@ -1,0 +1,384 @@
+{% extends "base_auth.html" %} {% block body_content %}
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css"
+/>
+<script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
+<script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css" />
+
+<div class="max-w-2xl mx-auto">
+  <div class="border-b border-gray-200 dark:border-gray-700 mb-4">
+    <ul
+      class="flex justify-center -mb-px"
+      id="myTab"
+      data-tabs-toggle="#myTabContent"
+      role="tablist"
+    >
+      <li class="mx-4" role="presentation">
+        <a href="{{url_for('admin.admin_create_new_user')}}">
+          <button
+            class="inline-block rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 dark:border-blue-500"
+            id="profile-tab"
+            data-tabs-target="#profile"
+            type="button"
+            role="tab"
+            aria-controls="profile"
+            aria-selected="true"
+          >
+            Yeni istifadəçi yarad
+          </button>
+        </a>
+      </li>
+      <li class="mx-2" role="presentation">
+        <a href="{{url_for('admin.admin_index')}}">
+          <button
+            class="inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300"
+            id="dashboard-tab"
+            data-tabs-target="#dashboard"
+            type="button"
+            role="tab"
+            aria-controls="dashboard"
+            aria-selected="false"
+          >
+            Reklam yoxlanışı
+          </button>
+        </a>
+      </li>
+      <li class="mx-4" role="presentation">
+        <a href="{{url_for('admin.add_new_car')}}">
+          <button
+            class="inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300"
+            id="settings-tab"
+            data-tabs-target="#settings"
+            type="button"
+            role="tab"
+            aria-controls="settings"
+            aria-selected="false"
+          >
+            Məlumat yenilə
+          </button>
+        </a>
+      </li>
+
+      <li class="mx-4" role="presentation">
+        <a href="{{url_for('admin.stats')}}">
+          <button
+            class="inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300"
+            id="stats-tab"
+            data-tabs-target="#settings"
+            type="button"
+            role="tab"
+            aria-controls="settings"
+            aria-selected="false"
+          >
+            Statistika
+          </button>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- End tab -->
+</div>
+
+{% if is_success %}
+<div class="flex justify-center" id="success_alert_banner">
+  <div
+    class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
+  >
+    <div class="flex items-center justify-center w-12 bg-emerald-500">
+      <svg
+        class="w-6 h-6 text-white fill-current"
+        viewBox="0 0 40 40"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"
+        />
+      </svg>
+    </div>
+
+    <div class="px-4 py-2 -mx-3">
+      <div class="mx-3">
+        <span class="font-semibold text-emerald-500 dark:text-emerald-400"
+          >Müvəffəqiyyət</span
+        >
+
+        <p class="text-sm text-gray-600 dark:text-gray-200">
+          {% if company_name %} {{company_name}} - müvəffəqiyyətlə əlavə olundu
+          {% elif user_name %} {{user_name}} - müvəffəqiyyətlə əlavə olundu {%
+          endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% elif is_success == False %}
+
+<div class="flex justify-center" id="success_alert_banner">
+  <div
+    class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
+  >
+    <div class="flex items-center justify-center w-12 bg-red-500">
+      <svg
+        class="w-6 h-6 text-white fill-current"
+        viewBox="0 0 40 40"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z"
+        />
+      </svg>
+    </div>
+
+    <div class="px-4 py-2 -mx-3">
+      <div class="mx-3">
+        <span class="font-semibold text-red-500 dark:text-red-400">Xəta</span>
+        <p
+          class="text-xs text-gray-600 dark:text-gray-200"
+          id="error_message_text"
+        >
+          {% if error_message %} {{error_message}} {% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+<section
+  class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800"
+>
+  <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">
+    Fleet (Company) əlavə et
+  </h2>
+
+  <form action="{{url_for('admin.admin_create_new_company')}}" method="POST">
+    <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+      <div>
+        <label class="text-gray-500 dark:text-gray-200" for="username"
+          >Fleet (Company) adı (Məs: TX ...)*</label
+        >
+        <input
+          id="companyName"
+          name="companyName"
+          type="text"
+          class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+          required
+        />
+      </div>
+
+      <div>
+        <label class="text-gray-500 dark:text-gray-200" for="emailAddress"
+          >Daxili Fleet (Company) ID*
+        </label>
+        <input
+          id="internalCompanyId"
+          name="internalCompanyId"
+          type="number"
+          class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+          required
+        />
+      </div>
+
+      <div>
+        <label class="text-gray-500 dark:text-gray-200" for="password"
+          >Fleet (Company) Balans kodu*</label
+        >
+        <input
+          id="balanceRefNumber"
+          name="balanceRefNumber"
+          type="number"
+          class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+          required
+        />
+      </div>
+
+      <div>
+        <label
+          class="text-gray-500 dark:text-gray-200"
+          for="passwordConfirmation"
+          >Fleet (Company) Status</label
+        >
+        <input
+          id="internalCompanyStatus"
+          name="internalCompanyStatus"
+          type="text"
+          class="block w-full px-4 py-2 mt-2 text-green-400 bg-white border border-green-200 rounded-md dark:bg-green-800 dark:text-green-300 dark:border-green-600 focus:border-green-400 focus:ring-green-300 focus:ring-opacity-40 dark:focus:border-green-300 focus:outline-none focus:ring"
+          value="Active"
+          readonly
+        />
+      </div>
+    </div>
+
+    <div class="flex justify-end mt-6">
+      <button
+        class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-300 focus:outline-none focus:ring-blue-300"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+
+  <hr class="h-px my-4 bg-gray-300 border-0 dark:bg-gray-800" />
+
+  <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">
+    İstifadəçi yarat
+  </h2>
+
+  <form action="{{ url_for('admin.admin_create_new_userr') }}" method="POST">
+    <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+      <div>
+        <label class="text-gray-500 dark:text-gray-200" for="username"
+          >İstifadəçi adı (username)*</label
+        >
+        <input
+          id="username"
+          type="text"
+          class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+          name="username"
+          required
+        />
+      </div>
+
+      <div>
+        <label class="text-gray-500 dark:text-gray-200" for="emailAddress"
+          >Email</label
+        >
+        <input
+          id="emailAddress"
+          type="email"
+          class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+          name="email"
+        />
+      </div>
+
+      <div>
+        <label class="text-gray-500 dark:text-gray-200" for="password"
+          >Şifrə (Ən az 6 character)*</label
+        >
+        <input
+          id="password"
+          type="text"
+          class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+          name="password"
+          required
+        />
+      </div>
+
+      <div>
+        <label
+          class="text-gray-500 dark:text-gray-200"
+          for="passwordConfirmation"
+          >Mobil nömrə</label
+        >
+        <input
+          id="mobileNo"
+          type="text"
+          class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+          name="mobileNo"
+        />
+      </div>
+
+      <div>
+        <label
+          class="text-gray-500 dark:text-gray-200"
+          for="passwordConfirmation"
+          >Daxili istifadəçi (fleet-owner) ID</label
+        >
+        <input
+          id="internalManagerId"
+          type="text"
+          class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+          name="internalManagerId"
+        />
+      </div>
+
+      <div>
+        <label class="text-gray-500 dark:text-gray-200" for="underline_select"
+          >Fleet (Company)*</label
+        >
+
+        <select
+          name="companyId"
+          id="companyId"
+          class="block w-full px-4 py-2 mt-2 text-gray-400 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+          autocomplete="off"
+          required
+        >
+          <option value="" selected>Fleet (Company) Seç</option>
+          {% for company_id in reversed_keys %}
+
+          <option value="{{ company_id }}">
+            {% for comp_name in company_models[company_id] %} {{ comp_name }}
+            ---- {{company_models[company_id][comp_name]}} aktiv user {% endfor
+            %}
+          </option>
+
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="flex justify-end mt-6">
+      <button
+        class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-300 focus:outline-none focus:ring-blue-300"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+
+  <hr class="h-px my-4 bg-gray-300 border-0 dark:bg-gray-800" />
+
+  <h2
+    class="my-4 text-lg font-semibold text-gray-700 capitalize dark:text-white"
+  >
+    Bulk create
+  </h2>
+
+  <form action="">
+    <div class="flex items-center justify-center w-full">
+      <label
+        for="dropzone-file"
+        class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+      >
+        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+          <svg
+            class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 20 16"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+            />
+          </svg>
+          <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+            <span class="font-semibold">Click to upload</span>
+          </p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">CSV ONLY</p>
+        </div>
+        <input id="dropzone-file" type="file" class="hidden" />
+      </label>
+    </div>
+
+    <div class="flex justify-end mt-6">
+      <button
+        class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-300 focus:outline-none focus:ring-blue-300"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% block html_tag %}
+<html class="h-full bg-gray-50">
+  {% endblock %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta property="og:title" content="Fleet - Azerbaijan" />
+    <meta
+      property="og:image"
+      content="{{ url_for('static', filename='img/fo_logo.svg') }}"
+    />
+    <meta
+      property="og:description"
+      content="Azərbaycan Fleet avtomobillərin idarəetmə paneli."
+    />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+      defer
+    ></script>
+    <link
+      href="{{url_for('static',filename='dist/output.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{url_for('static',filename='dist/custom.css')}}"
+      rel="stylesheet"
+    />
+    <title>{{ title }}</title>
+  </head>
+
+  {% block body_tag %}
+  <body>
+    {% endblock %} {% block body_content %} {% endblock %}
+  </body>
+</html>

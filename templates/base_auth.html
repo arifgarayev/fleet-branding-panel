@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+{% block html_tag %}
+<html class="h-full bg-gray-50">
+{% endblock %}
+<head>
+  <meta charset="UTF-8" />
+  <meta property="og:title" content="Fleet - Azerbaijan" />
+  <meta
+          property="og:image"
+          content="{{ url_for('static', filename='img/fo_logo.svg') }}"
+  />
+  <meta
+          property="og:description"
+          content="Azerbaijan. Fleet avtomobillərin idarəetmə paneli."
+  />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script
+          src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+          defer
+  ></script>
+
+  <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"
+          defer
+  ></script>
+
+  <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css"
+          rel="stylesheet"
+  />
+
+  <script
+          src="{{url_for('static',filename='js/progressbar.js')}}"
+          type="application/javascript"
+          defer
+  ></script>
+
+  <link
+          href="{{url_for('static',filename='dist/output.css')}}"
+          rel="stylesheet"
+  />
+  <link
+          href="{{url_for('static',filename='dist/custom.css')}}"
+          rel="stylesheet"
+  />
+
+  <link
+          rel="stylesheet"
+          href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css"
+  />
+
+  <script
+          src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"
+          defer
+  ></script>
+  <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js" defer></script>
+  <link
+          rel="stylesheet"
+          href="https://unpkg.com/nprogress@0.2.0/nprogress.css"
+  />
+
+
+  <link rel="stylesheet" href="{{url_for('static',
+  filename='js/video-player-lazy-load-rtop/dist/css/rtop.videoPlayer.1.0.2.min.css')}}" />
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+
+
+  <script type="text/javascript" src="{{url_for('static',
+  filename='js/video-player-lazy-load-rtop/dist/js/rtop.videoPlayer.1.0.2.min.js')}}"></script>
+
+
+  <script
+          src="{{url_for('static',filename='js/custom.js')}}"
+          type="application/javascript"
+          defer
+  ></script>
+
+  <!-- <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script> -->
+  <title>{{ title }}</title>
+</head>
+<header>
+  <nav
+          class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900"
+  >
+    <div
+            class="flex flex-nowrap items-center justify-between mx-auto"
+    >
+      <a href="/" class="flex items-center">
+        <img
+                src="{{ url_for('static', filename='img/fo_logo.svg') }}"
+                class="h-6 mr-3 sm:h-9"
+                alt="Logo"
+        />
+      </a>
+
+
+
+      <div class="flex space-x-2 md:order-2 md:space-x-2">
+
+        <button
+                type="button"
+                class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm ml-3 px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600"
+                disabled
+        >
+          <div class="flex-row md:flex-row sm:flex-row">
+            <div>
+              Həftə №: {{ keyword["week_no"] }}
+            </div>
+            <div>
+              Açar söz: {{ keyword["key"] }}
+            </div>
+          </div>
+
+        </button>
+
+
+        <button
+                type="button"
+                class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600"
+                disabled
+        >
+          {{ fleet_name }}
+        </button>
+        <button
+                data-collapse-toggle="navbar-cta"
+                type="button"
+                class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-cta"
+                aria-expanded="false"
+        >
+          <svg
+                  class="w-6 h-6"
+                  aria-hidden="true"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+                    fill-rule="evenodd"
+                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <div
+              class="hidden w-full md:block md:w-auto"
+              id="navbar-cta"
+      >
+        <ul
+                class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+        >
+
+<!--          for highlight-->
+          {% if '/tarixce' not in url_for(request.endpoint) and '/admin' not
+          in url_for(request.endpoint) %}
+
+          <li>
+            <a
+                    href="{{ url_for('video_upload.index_video_upload') }}"
+                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+                    aria-current="page"
+            >Əsas</a
+            >
+          </li>
+          <li>
+            <a
+                    href="{{ url_for('history.tarixce') }}"
+                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+            >Sorğu tarixçəsi</a
+            >
+          </li>
+          {% if session['is_admin'] == 1 %}
+          <li>
+            <a
+                    href="/admin"
+                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+            >Admin-Panel</a
+            >
+          </li>
+          {% endif %}
+          <li>
+            <a
+                    href="{{ url_for('api.logout') }}"
+                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+            >Çıxış</a
+            >
+          </li>
+
+          {% elif '/tarixce' in url_for(request.endpoint) %}
+
+          <li>
+            <a
+                    href="{{ url_for('video_upload.index_video_upload') }}"
+                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+            >Əsas</a
+            >
+          </li>
+          <li>
+            <a
+                    href="{{ url_for('history.tarixce') }}"
+                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+                    aria-current="page"
+            >Sorğu tarixçəsi</a
+            >
+          </li>
+          {% if session['is_admin'] == 1 %}
+          <li>
+            <a
+                    href="/admin"
+                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+            >Admin-Panel</a
+            >
+          </li>
+          {% endif %}
+          <li>
+            <a
+                    href="{{ url_for('api.logout') }}"
+                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+            >Çıxış</a
+            >
+          </li>
+
+          {% else %}
+
+          <li>
+            <a
+                    href="{{ url_for('video_upload.index_video_upload') }}"
+                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+            >Əsas</a
+            >
+          </li>
+          <li>
+            <a
+                    href="{{ url_for('history.tarixce') }}"
+                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+            >Sorğu tarixçəsi</a
+            >
+          </li>
+          {% if session['is_admin'] == 1 %}
+          <li>
+            <a
+                    href="/admin"
+                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+                    aria-current="page"
+            >Admin-Panel</a
+            >
+          </li>
+          {% endif %}
+          <li>
+            <a
+                    href="{{ url_for('api.logout') }}"
+                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+            >Çıxış</a
+            >
+          </li>
+
+
+
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+{% block body_tag %}
+<body>
+{% endblock %} {% block body_content %} {% endblock %}
+
+<footer class="h-full bg-gray-50">
+  <div class="bg-gray-50 inset-x-0 bottom-0 p-4">
+    <div
+            class="container flex flex-col items-center justify-between p-6 mx-auto space-y-4 sm:space-y-0 sm:flex-row"
+    >
+      <a href="/">
+        <img
+                class="w-auto h-7"
+                src="{{ url_for('static', filename='img/fo_logo.svg') }}"
+                alt=""
+        />
+      </a>
+
+      <div class="flex -mx-2">
+        <p class="text-sm text-gray-600 dark:text-gray-300">
+          Balans artırma kodu: {{ internal_company_balance_ref }}
+        </p>
+      </div>
+      <div class="flex -mx-2">
+        <p class="text-sm text-gray-600 dark:text-gray-300">
+          Azerbaijan
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

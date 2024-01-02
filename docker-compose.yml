@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  flaskapp:
+
+    build:
+      context: .
+      dockerfile: gunicorn.Dockerfile
+    image: flaskapp:v1
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+    deploy:
+      replicas: 5
+      update_config:
+        parallelism: 4
+        delay: 10s
+      restart_policy:
+        max_attempts: 4
+        condition: on-failure
+
+
+
+  proxy:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    image: nginx_proxy:v1
+    ports:
+      - 80:80
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+          - node.labels.environment == production
+          - node.labels.disktype == ssd
+    depends_on:
+      - flaskapp

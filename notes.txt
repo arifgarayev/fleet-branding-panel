@@ -1,0 +1,9 @@
+## GLOBAL SESSION VALUES
+
+- internal_company_name
+
+- internal_company_status
+
+- internal_company_balance_refs
+
+-

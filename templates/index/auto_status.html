@@ -1,0 +1,383 @@
+{% extends "base_auth.html" %} {% block body_content %}
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css"
+/>
+<script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
+
+<div class="max-w-6xl mx-auto">
+  <div class="border-b border-gray-200 dark:border-gray-700 mb-4">
+    <ul
+      class="flex justify-center -mb-px"
+      id="myTab"
+      data-tabs-toggle="#myTabContent"
+      role="tablist"
+    >
+      <li class="mx-4" role="presentation">
+        <a href="/ferqlenme-upload">
+          <button
+            class="inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300"
+            id="profile-tab"
+            data-tabs-target="#profile"
+            type="button"
+            role="tab"
+            aria-controls="profile"
+            aria-selected="false"
+          >
+            Fərqlənmə nişanı
+          </button>
+        </a>
+      </li>
+      <li class="mx-2" role="presentation">
+        <a href="/">
+          <button
+            class="inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300"
+            id="dashboard-tab"
+            data-tabs-target="#dashboard"
+            type="button"
+            role="tab"
+            aria-controls="dashboard"
+            aria-selected="false"
+          >
+            Video reklam yoxlanışı
+          </button>
+        </a>
+      </li>
+      <li class="mx-4" role="presentation">
+        <a href="/avto-status">
+          <button
+            class="inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300"
+            id="settings-tab"
+            data-tabs-target="#settings"
+            type="button"
+            role="tab"
+            aria-controls="settings"
+            aria-selected="true"
+          >
+            Avtomobilin statusu
+          </button>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div id="myTabContent">
+    {% if is_uploaded %}
+    <div class="flex justify-center" id="success_alert_banner">
+      <div
+        class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800"
+      >
+        <div class="flex items-center justify-center w-12 bg-emerald-500">
+          <svg
+            class="w-6 h-6 text-white fill-current"
+            viewBox="0 0 40 40"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"
+            />
+          </svg>
+        </div>
+
+        <div class="px-4 py-2 -mx-3">
+          <div class="mx-3">
+            <span class="font-semibold text-emerald-500 dark:text-emerald-400"
+              >Müvəffəqiyyət</span
+            >
+            <p class="text-sm text-gray-600 dark:text-gray-200">
+              Avtomobil silinməsi müvəffəqiyyətlə göndərildi
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <!-- End warning alert message -->
+
+    <!-- New tab -->
+    <div
+      class="flex justify-center bg-gray-50 p-4 rounded-lg dark:bg-gray-800"
+      id="profile"
+      role="tabpanel"
+      aria-labelledby="profile-tab"
+    >
+      <div class="flex items-center justify-center w-56 h-56">
+        <div role="status">
+          <svg
+            aria-hidden="true"
+            class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            viewBox="0 0 100 101"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+              fill="currentColor"
+            />
+            <path
+              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+              fill="currentFill"
+            />
+          </svg>
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+    <!-- End tab -->
+
+    <!-- New tab -->
+    <div
+      class="flex justify-center bg-gray-50 p-4 rounded-lg dark:bg-gray-800"
+      id="dashboard"
+      role="tabpanel"
+      aria-labelledby="dashboard-tab"
+    >
+      <div class="flex items-center justify-center w-56 h-56">
+        <div role="status">
+          <svg
+            aria-hidden="true"
+            class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            viewBox="0 0 100 101"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+              fill="currentColor"
+            />
+            <path
+              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+              fill="currentFill"
+            />
+          </svg>
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+    <!-- End tab -->
+
+    <!-- New tab -->
+    <div
+      class="flex justify-center bg-gray-50 p-4 rounded-lg dark:bg-gray-800"
+      id="settings"
+      role="tabpanel"
+      aria-labelledby="settings-tab"
+    >
+      <section class="container px-4 mx-auto">
+        <div class="flex items-center gap-x-3">
+          <h2 class="text-lg font-medium text-gray-800 dark:text-white">
+            Mövcud avtomobillər
+          </h2>
+
+          <span
+            class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400"
+            >{{ car_model|length }} avtomobil</span
+          >
+        </div>
+
+        <div class="flex flex-col mt-6">
+          <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div
+              class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8"
+            >
+              <div
+                class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg"
+              >
+                <table
+                  class="min-w-full divide-y divide-gray-200 dark:divide-gray-700"
+                >
+                  <thead class="bg-gray-50 dark:bg-gray-800">
+                    <tr>
+                      <th
+                        scope="col"
+                        class="py-3.5 text-sm font-normal text-gray-500 dark:text-gray-400"
+                      >
+                        <div class="flex items-center gap-x-3">
+                          <span>Avtomobilin qeydiyyat nişanı</span>
+                        </div>
+                      </th>
+
+                      <th
+                        scope="col"
+                        class="px-16 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      >
+                        <div class="flex items-center gap-x-3">
+                          <span>Status</span>
+                        </div>
+                      </th>
+
+                      <th
+                        scope="col"
+                        class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      >
+                        <span>Səbəb</span>
+                      </th>
+
+                      <th
+                        scope="col"
+                        class="px-14 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      >
+                        şərh
+                      </th>
+
+                      <th scope="col" class="relative py-3.5 px-4">
+                        <span class="sr-only">Edit</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900"
+                  >
+                    <form action="/avto-status" method="POST" id="auto-status">
+                      {% for car in car_model %}
+
+                      <tr>
+                        <td
+                          class="px-4 py-4 text-center text-sm font-medium text-gray-700 whitespace-nowrap"
+                        >
+                          <div class="inline-flex items-center gap-x-3">
+                            <div class="flex items-center gap-x-2">
+                              <div>
+                                <h2
+                                  class="font-medium text-gray-800 dark:text-white"
+                                >
+                                  {{ car.internal_car_reg_number }}
+                                </h2>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td
+                          class="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap"
+                        >
+                          {% if car.internal_car_status == 'active' %}
+
+                          <div
+                            class="inline-flex items-center px-3 py-1 gap-x-2"
+                          >
+                            <span
+                              class="h-1.5 w-1.5 rounded-full bg-emerald-500"
+                            ></span>
+
+                            <h2 class="text-sm font-normal text-emerald-500">
+                              Aktiv
+                            </h2>
+                          </div>
+
+                          {% elif car.internal_car_status == 'blocked' %}
+
+                          <div
+                            class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-red-500 bg-red-100/60 dark:bg-gray-800"
+                          >
+                            <svg
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M9 3L3 9M3 3L9 9"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </svg>
+
+                            <h2 class="text-sm font-normal">Bloklu</h2>
+                          </div>
+
+                          {% elif car.internal_car_status == 'pending' %}
+                          <div
+                            class="inline-flex items-center px-3 py-1 text-gray-500 rounded-full gap-x-2 bg-gray-100/60 dark:bg-gray-800"
+                          >
+                            <svg
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M4.5 7L2 4.5M2 4.5L4.5 2M2 4.5H8C8.53043 4.5 9.03914 4.71071 9.41421 5.08579C9.78929 5.46086 10 5.96957 10 6.5V10"
+                                stroke="#667085"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </svg>
+
+                            <h2 class="text-sm font-normal">Yoxlanışda</h2>
+                          </div>
+                          {% endif %}
+                        </td>
+                        <td
+                          class="px-4 py-6 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
+                        >
+                          <textarea
+                            id="fo_comment"
+                            name="fo_comment_{{ car.id }}"
+                            class="block w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Qeyd"
+                          ></textarea>
+                        </td>
+                        <td
+                          class="px-4 py-6 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
+                        >
+                          <textarea
+                            id="admin_comment"
+                            name="admin_comment"
+                            class="block w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Qeyd"
+                            disabled
+                          ></textarea>
+                        </td>
+
+                        <td class="px-4 py-4 text-sm whitespace-nowrap">
+                          <div class="flex flex-col items-center gap-y-2">
+                            <button
+                              class="flex items-center px-2 py-2 font-small tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80"
+                              type="submit"
+                              form="auto-status"
+                              id="delete_car"
+                              name="submit"
+                              value="{{ car.id }}"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-5 h-5 sm:w-6 sm:h-6"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                                />
+                              </svg>
+
+                              <span class="mx-1">Avtomobili sil</span>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </form>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- End tab -->
+  </div>
+</div>
+
+{% endblock %}
