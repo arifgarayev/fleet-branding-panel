@@ -10,7 +10,7 @@ FLASK_RUN_PORT = environ.get("FLASK_RUN_PORT")
 FLASK_DEBUG = environ.get("FLASK_DEBUG")
 
 
-# Global vars
+# Global vars t
 DB_NAME = environ.get('DB_NAME')
 DB_USER = environ.get('DB_USER')
 DB_PASS = environ.get('DB_PASS')
