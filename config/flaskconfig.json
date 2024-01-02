@@ -1,0 +1,29 @@
+{
+  "ENV": "production",
+  "SESSION_REFRESH_EACH_REQUEST": false,
+  "SESSION_PERMANENT": false,
+  "SECRET_KEY": "e4e977e155a5",
+  "SESSION_TYPE": "filesystem",
+  "SESSION_FILE_DIR": "./app/flask_session",
+  "UPLOAD_FOLDER": "./tmp/uploaded_files",
+  "TEMPLATES_AUTO_RELOAD": true,
+  "SQLALCHEMY_DATABASE_URI_RES": "postgresql://",
+  "SQLALCHEMY_DATABASE_URI": "postgresql://",
+  "SESSION_PROTECTION": "strong",
+  "TRAP_HTTP_EXCEPTIONS": true,
+  "SESSION_COOKIE_SECURE": false,
+  "SESSION_COOKIE_HTTPONLY": true,
+  "SECURITY_CSRF_COOKIE_SECURE": true,
+  "SECURITY_REMEMBER_ME_SECURE": false,
+  "BCRYPT_LOG_ROUNDS": 9,
+  "GOOGLE_STORAGE_LOCAL_DEST": "./tmp/uploaded_files",
+  "GOOGLE_STORAGE_FILES_BUCKET": "branded-car-verification",
+  "SQLALCHEMY_ENGINE_OPTIONS": {
+    "pool_size": 400,
+    "max_overflow": 100,
+    "pool_recycle": 3600,
+    "pool_pre_ping": true
+  },
+  "SQLALCHEMY_TRACK_MODIFICATIONS": false,
+  "SQLALCHEMY_MAX_OVERFLOW": 20
+}
