@@ -3,9 +3,7 @@ from app.model.company import Company
 
 
 class Car(db.Model):
-
-    __tablename__ = 'cars'
-
+    __tablename__ = "cars"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     internal_car_id = db.Column(db.Integer, nullable=False)
@@ -18,11 +16,9 @@ class Car(db.Model):
     internal_car_status = db.Column(db.String, nullable=False)
     internal_car_date = db.Column(db.DateTime, default=db.func.now())
 
+    company_id_fkey = db.Column(db.Integer, db.ForeignKey("company.id"))
 
-    company_id_fkey = db.Column(db.Integer, db.ForeignKey('company.id'))
-
-    cars_company_id_fk = db.relationship(Company, backref='cars')
-
+    cars_company_id_fk = db.relationship(Company, backref="cars")
 
     def get_id(self):
         return str(self.id)

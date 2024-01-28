@@ -14,15 +14,15 @@ class FileSystemSessionInterface(SessionInterface):
         sid = request.cookies.get(app.session_cookie_name)
         if not sid:
             sid = os.urandom(24).hex()
-            return {'_session_id': sid}
+            return {"_session_id": sid}
         filename = os.path.join(self.directory, sid)
         if not os.path.exists(filename):
             return None
-        with open(filename, 'r') as f:
+        with open(filename, "r") as f:
             data = f.read()
         return json.loads(data)
 
     def save_session(self, app, session, response):
-        filename = os.path.join(self.directory, session['_session_id'])
-        with open(filename, 'w') as f:
+        filename = os.path.join(self.directory, session["_session_id"])
+        with open(filename, "w") as f:
             f.write(json.dumps(session))

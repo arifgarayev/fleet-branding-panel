@@ -7,4 +7,3 @@ r_json = requests.get("https://jsonplaceholder.typicode.com/todos").json()
 #         print(todo_data)
 
 print(r_json)
-        

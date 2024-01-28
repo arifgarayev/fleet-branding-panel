@@ -20,7 +20,11 @@ from app.view.auto_status import app as auto_status_bp
 from app.view.history import app as history_bp
 from app.view.admin import app as admin_bp
 from app.middlewares.datetime_checker import app as middleware_bp
-from app.view.error_handler import app as error_handler_bp, page_not_found, not_a_weekday
+from app.view.error_handler import (
+    app as error_handler_bp,
+    page_not_found,
+    not_a_weekday,
+)
 
 from flask_bcrypt import Bcrypt
 from app.view.auth import login_manager
@@ -33,25 +37,23 @@ from app.view.video_upload import applications_repository, company_repository
 app_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, app_root)
 
-app = Flask(__name__, static_folder='./static', template_folder='./templates')
-
+app = Flask(__name__, static_folder="./static", template_folder="./templates")
 
 
 login_manager.init_app(app)
-login_manager.session_protection = 'strong'
-login_manager.login_view = '/login'
+login_manager.session_protection = "strong"
+login_manager.login_view = "/login"
 login_manager.use_session_for_next = True
-
 
 
 app.config.from_file("./config/flaskconfig.json", load=json.load)
 # app.config['SESSION_COOKIE_SECURE'] = False
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=40)
-app.config.update(GOOGLE_STORAGE_SIGNATURE = {"expiration": timedelta(minutes=30)})
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=40)
+app.config.update(GOOGLE_STORAGE_SIGNATURE={"expiration": timedelta(minutes=30)})
 # app.session_interface = FileSystemSessionInterface(SESSION_FILE_DIR)
 
 
-#TODO FIXME uncomment in production
+# TODO FIXME uncomment in production
 
 app.register_error_handler(405, not_a_weekday)
 app.register_error_handler(Exception, page_not_found)
@@ -64,14 +66,11 @@ bcrypt.init_app(app)
 executor.init_app(app)
 
 
-
 with app.app_context():
-
     print("Database URI:", db.engine.url)
     print("Pool Size:", db.engine.pool.status())
     print("Pool Size:", db.engine.pool.echo)
     print("Echo:", db.engine.echo)
-
 
 
 # FIXME enable
@@ -79,7 +78,6 @@ with app.app_context():
     db.reflect()
 
 CORS(app)
-
 
 
 app.register_blueprint(routes_bp)
@@ -93,20 +91,21 @@ app.register_blueprint(middleware_bp)
 app.register_blueprint(error_handler_bp)
 
 
-
-list_of_repos = [user_repository, car_repository, applications_repository, company_repository,
-                 keyword_repo]
+list_of_repos = [
+    user_repository,
+    car_repository,
+    applications_repository,
+    company_repository,
+    keyword_repo,
+]
 
 
 for repo in list_of_repos:
     repo.set_session(db.session)
 
-    if hasattr(repo, '_async_session'):
+    if hasattr(repo, "_async_session"):
         repo._async_session = async_session
 
 
-if __name__ == '__main__':
-
-
+if __name__ == "__main__":
     app.run(host=FLASK_RUN_HOST, port=FLASK_RUN_PORT, threaded=True)
-

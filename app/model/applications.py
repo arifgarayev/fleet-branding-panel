@@ -4,10 +4,8 @@ from app.model.cars import Car
 from app.model.user import User
 
 
-
 class Applications(db.Model):
-
-    __tablename__ = 'applications'
+    __tablename__ = "applications"
     # __table_args__ = {'schema': 'public'}
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -20,19 +18,15 @@ class Applications(db.Model):
     filename = db.Column(db.String, nullable=True)
     b_comment = db.Column(db.String, nullable=True)
     is_requested_to_delete = db.Column(db.Integer, default=0)
-    application_status = db.Column(db.String, default='Pending')
+    application_status = db.Column(db.String, default="Pending")
 
+    car_id_fkey = db.Column(db.Integer, db.ForeignKey("cars.id"))
+    applications_car_id_fk = db.relationship(Car, backref="cars")
 
-
-    car_id_fkey = db.Column(db.Integer, db.ForeignKey('cars.id'))
-    applications_car_id_fk = db.relationship(Car, backref='cars')
-
-
-    users_id_fkey = db.Column(db.Integer, db.ForeignKey('users.id'))
-    applications_users_id_fk = db.relationship(User, backref='users')
+    users_id_fkey = db.Column(db.Integer, db.ForeignKey("users.id"))
+    applications_users_id_fk = db.relationship(User, backref="users")
 
     # company = db.relationship(Company, secondary='cars', uselist=False)
-
 
     def get_id(self):
         return str(self.id)
@@ -42,5 +36,3 @@ class Applications(db.Model):
 
     def get_user_id(self):
         return str(self.users_id_fkey)
-
-

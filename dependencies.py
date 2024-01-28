@@ -10,8 +10,6 @@ from flask_executor import Executor
 from concurrent.futures import ThreadPoolExecutor
 
 
-
-
 client = storage.Client()
 
 bucket = client.bucket(GCP_BUCKET_NAME)
@@ -25,17 +23,14 @@ bcrypt = Bcrypt()
 csrf = CSRFProtect()
 
 
-executor = Executor() # thread is default
+executor = Executor()  # thread is default
 
 pprocess = ThreadPoolExecutor(max_workers=1)
-
 
 
 db_engine = create_async_engine(SQLALCHEMY_DATABASE_URI_ASYNC, echo=True, future=True)
 async_session = sessionmaker(db_engine, class_=AsyncSession)
 
 
-
 io_loop = asyncio.new_event_loop()
 asyncio.set_event_loop(io_loop)
-

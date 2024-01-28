@@ -56,7 +56,6 @@ def index_video_upload():
 
     # ensure all_cars non empty
     if request.method == "POST" and (int(request.form["isCustomCarReg"]) or all_cars):
-
         this_controller = VideoUploaderController(
             car_repository, request, applications_repository
         )

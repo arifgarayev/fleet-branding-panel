@@ -1,12 +1,6 @@
-
-
-
 class HelperUtils:
-
     @staticmethod
-    def try_or_default(fn,
-                       default_value):
-
+    def try_or_default(fn, default_value):
         try:
             return fn()
         except Exception as e:
